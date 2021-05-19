@@ -1,0 +1,35 @@
+  <%- include('header'); -%>
+
+  <div class="box" id="heading">
+    <h1>
+      <%= todayMarker %>
+    </h1>
+  </div>
+
+  <div class="box">
+
+    <% itemMarker.forEach(function(i){ %>
+      <form class="" action="/delete" method="post">
+        <div class="item">
+
+          <!-- we did not want to create a submit button as it will not look good in the list
+          onChange detects a change and calls the given function
+          form.submit() will submit the form -->
+          <input type="checkbox" onChange="this.form.submit()" name="deleteItem" value="<%= i._id %>">
+
+          <!-- we wanted to access the name of the list without creating an extra input field
+          as it does not look goon on screen
+          so, we created a  hidden input field -->
+          <input type="hidden" name="listName" value="<%= todayMarker %>">
+          <p> <%= i.name %> </p>
+        </div>
+      </form>
+    <% } ) %>
+
+    <form action="/" method="post">
+      <input type="text" name="newItem" placeholder="Enter new work">
+      <button type="submit" name="button" value= "<%= todayMarker %>"> + </button>
+    </form>
+  </div>
+
+  <%- include('footer') -%>
